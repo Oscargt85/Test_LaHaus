@@ -1,4 +1,4 @@
-from app import db
+from aplication import db
 
 class Client(db.Model):
     __tablename__ = 'clients'

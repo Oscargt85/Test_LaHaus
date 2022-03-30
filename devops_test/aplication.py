@@ -3,9 +3,9 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-
+print(app)
 app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 from models import Client
@@ -13,13 +13,14 @@ from models import Client
 #Index
 @app.route("/")
 def index():
-    return "This is the app index"
+    return "Prueba La Haus"
 
 #Add client and money
 @app.route("/add")
 def add_client():
     name=request.args.get('name')
     money=request.args.get('money')
+    print(money)
     try:
         client=Client(
             name=name,
