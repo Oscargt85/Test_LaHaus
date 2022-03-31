@@ -19,4 +19,4 @@ steps:
     echo $(APP_SETTINGS)
   displayName: 'Install dependencies'
 
-- script: python devops_test/aplication.py
+- script: python devops_test/aplication.py &
