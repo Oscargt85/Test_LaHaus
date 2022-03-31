@@ -21,12 +21,23 @@ steps:
 
 - script: python devops_test/aplication.py &
 
+#- task: Docker@2
+#  inputs:
+#    containerRegistry: 'Docker_Registry'
+#    repository: 'davidgt85'
+#    command: 'buildAndPush'
+#    Dockerfile: 'devops_test/Dockerfile'
+
 - task: Docker@2
+  displayName: Push image
   inputs:
-    containerRegistry: 'Docker_Registry'
-    repository: 'davidgt85'
-    command: 'buildAndPush'
-    Dockerfile: 'devops_test/Dockerfile'
+    containerRegistry: |
+      $(Docker_Registry)
+    repository: $(davidgt85)
+    command: push
+    tags: |
+      test1
+      test2
 
 
 
