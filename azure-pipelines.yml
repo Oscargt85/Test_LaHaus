@@ -26,7 +26,7 @@ steps:
     containerRegistry: 'Docker_Registry'
     repository: 'davidgt85'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: 'devops_test/Dockerfile'
 
 
 
