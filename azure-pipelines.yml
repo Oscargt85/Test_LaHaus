@@ -5,9 +5,6 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  imageName: 'davidgt85/python-docker'
-
-variables:
   - name: APP_SETTINGS
     value: config.DevelopmentConfig
 
@@ -24,13 +21,12 @@ steps:
 
 - script: python devops_test/aplication.py &
 
-steps:
- - task: Docker@2
-   displayName: Build an image
-   inputs:
-     repository: $(imageName)
-     command: build
-     Dockerfile: devops_test/Dockerfile
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker_Registry'
+    repository: 'davidgt85'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 
 
 
