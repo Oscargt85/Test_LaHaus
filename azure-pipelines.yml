@@ -4,17 +4,19 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  - name: APP_SETTINGS
+    value: config.DevelopmentConfig
+
 steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.8'
 
 - script: |
-    $env:APP_SETTINGS="config.DevelopmentConfig"
-
-- script: |
     pip install flask
     pip install flask_sqlalchemy
+    echo $(APP_SETTINGS)
   displayName: 'Install dependencies'
 
 - script: python devops_test/aplication.py
