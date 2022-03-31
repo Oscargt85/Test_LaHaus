@@ -9,4 +9,8 @@ steps:
   inputs:
     versionSpec: '3.8'
 
+- script: |
+    pip install flask
+  displayName: 'Install dependencies'
+
 - script: python devops_test/aplication.py
