@@ -10,9 +10,11 @@ steps:
     versionSpec: '3.8'
 
 - script: |
+    $env:APP_SETTINGS="config.DevelopmentConfig"
+
+- script: |
     pip install flask
     pip install flask_sqlalchemy
-    set APP_SETTINGS="config.DevelopmentConfig"
   displayName: 'Install dependencies'
 
 - script: python devops_test/aplication.py
