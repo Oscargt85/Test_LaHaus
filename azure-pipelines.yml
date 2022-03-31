@@ -9,4 +9,4 @@ steps:
   inputs:
     versionSpec: '3.8'
 
-- script: python devops_test/aap.py
+- script: python devops_test/aplication.py
