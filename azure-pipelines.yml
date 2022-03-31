@@ -5,6 +5,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
+  imageName: 'davidgt85/python-docker'
   - name: APP_SETTINGS
     value: config.DevelopmentConfig
 
@@ -20,3 +21,18 @@ steps:
   displayName: 'Install dependencies'
 
 - script: python devops_test/aplication.py &
+
+steps:
+ - task: Docker@2
+   displayName: Build an image
+   inputs:
+     repository: $(imageName)
+     command: build
+     Dockerfile: devops_test/Dockerfile
+
+
+
+
+
+
+
