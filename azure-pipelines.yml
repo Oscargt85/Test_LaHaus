@@ -6,6 +6,8 @@ pool:
 
 variables:
   imageName: 'davidgt85/python-docker'
+
+variables:
   - name: APP_SETTINGS
     value: config.DevelopmentConfig
 
