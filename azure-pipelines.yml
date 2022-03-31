@@ -11,6 +11,7 @@ steps:
 
 - script: |
     pip install flask
+    pip install flask_sqlalchemy
   displayName: 'Install dependencies'
 
 - script: python devops_test/aplication.py
