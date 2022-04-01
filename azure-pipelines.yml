@@ -4,29 +4,6 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  - name: APP_SETTINGS
-    value: config.DevelopmentConfig
-
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.8'
-
-- script: |
-    pip install flask
-    pip install flask_sqlalchemy
-    echo $(APP_SETTINGS)
-  displayName: 'Install dependencies'
-
-- script: python devops_test/aplication.py &
-
-- task: Docker@2
-  inputs:
-    containerRegistry: 'Docker_Registry'
-    repository: 'davidgt85'
-    command: 'buildAndPush'
-    Dockerfile: 'devops_test/Dockerfile'
 
 
 
