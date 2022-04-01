@@ -23,7 +23,7 @@ stages:
           templateFile: 'infra/resources.yml'
 
 - stage: app
-  condition: and(succeeded(), eq(variables.isInfra, 'false'))
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
   jobs:
   - job: B1
     steps:
