@@ -23,13 +23,27 @@ stages:
           templateFile: 'infra/resources.yml'
 
 - stage: app
-  condition: and(succeeded(), eq(variables.isInfra, 'false'))  
+  condition: and(succeeded(), eq(variables.isInfra, 'false'))
   jobs:
   - job: B1
     steps:
+      - task: DockerInstaller@0
+        inputs:
+          dockerVersion: '17.09.0-ce'
+      - task: Docker@2
+        inputs:
+          repository: 'devops-test-lahaus/$(Build.Repository.Name)'
+          command: 'build'
+          Dockerfile: '**/Dockerfile'
+          tags: |
+            $(Build.BuildId)
+            latest
+        displayName: "Building image"
       - task: ECRPushImage@1
         inputs:
           awsCredentials: 'Registry-test'
           regionName: 'us-east-1'
-          imageSource: 'imageid'
+          imageSource: 'imagename'
+          sourceImageName: 'devops-test-lahaus/$(Build.Repository.Name)'
           repositoryName: 'devops-test-lahaus'
+        displayName: "Pushing image to ECR"
