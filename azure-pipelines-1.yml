@@ -1,0 +1,35 @@
+trigger:
+- main
+- infra
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  isInfra: $[eq(variables['Build.SourceBranch'], 'refs/heads/infra')]
+
+stages:
+- stage: infra
+  condition: and(succeeded(), eq(variables.isInfra, 'true'))
+  jobs:
+  - job: A1
+    steps:
+      - task: CloudFormationCreateOrUpdateStack@1
+        inputs:
+          awsCredentials: 'Registry-test'
+          regionName: 'us-east-1'
+          stackName: 'PythonApp'
+          templateSource: 'file'
+          templateFile: 'infra/resources.yml'
+
+- stage: app
+  condition: and(succeeded(), eq(variables.isInfra, 'false'))  
+  jobs:
+  - job: B1
+    steps:
+      - task: ECRPushImage@1
+        inputs:
+          awsCredentials: 'Registry-test'
+          regionName: 'us-east-1'
+          imageSource: 'imageid'
+          repositoryName: 'devops-test-lahaus'
