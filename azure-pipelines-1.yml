@@ -32,7 +32,7 @@ stages:
           dockerVersion: '17.09.0-ce'
       - task: Docker@2
         inputs:
-          repository: 'devops-test-lahaus/$(Build.Repository.Name)'
+          repository: 'devops-test-lahaus/lahaus_Api'
           command: 'build'
           Dockerfile: '**/Dockerfile'
           tags: |
@@ -44,6 +44,6 @@ stages:
           awsCredentials: 'Registry-test'
           regionName: 'us-east-1'
           imageSource: 'imagename'
-          sourceImageName: 'devops-test-lahaus/$(Build.Repository.Name)'
+          sourceImageName: 'devops-test-lahaus/lahaus_Api'
           repositoryName: 'devops-test-lahaus'
         displayName: "Pushing image to ECR"
