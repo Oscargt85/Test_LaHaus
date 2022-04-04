@@ -10,7 +10,7 @@ def create_tables():
 #Index
 @app.route("/")
 def index():
-    return "This is the app index"
+    return "Prueba La Haus"
 
 #Add client and money
 @app.route("/add")
