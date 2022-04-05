@@ -1,7 +1,14 @@
-from app import app, db
-from app import  request, jsonify
+import os
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
 
-from .models import Client
+app = Flask(__name__)
+os.environ['APP_SETTINGS']="config.DevelopmentConfig"
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
+
+from models import Client
 
 @app.before_first_request
 def create_tables():
@@ -17,6 +24,7 @@ def index():
 def add_client():
     name=request.args.get('name')
     money=request.args.get('money')
+    print(money)
     try:
         client=Client(
             name=name,
@@ -54,3 +62,6 @@ def get_by_name(name_):
         return jsonify(client.serialize())
     except Exception as e:
 	    return(str(e))
+
+if __name__ == '__main__':
+    app.run()

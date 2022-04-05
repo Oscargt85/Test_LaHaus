@@ -5,9 +5,11 @@ class Config(object):
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
+    extend_existing=True
     #Database URL
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///task.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///Nomina.db'
 
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
+    extend_existing=True
